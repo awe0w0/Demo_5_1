@@ -94,7 +94,7 @@ void AMyDefaultPawn::DestroySpline()
 
 void AMyDefaultPawn::SetFOV(float FOV)
 {
-	
+	Cast<APlayerController>(GetController())->PlayerCameraManager->SetFOV(FOV);
 }
 
 void AMyDefaultPawn::CreateCube1()

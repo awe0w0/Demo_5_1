@@ -102,7 +102,7 @@ void ACollisionActor::ButtonBImageAndCameraFOV()
 	MyWidgetInstance->PawnMove->SetStyle(BStyle);
 
 	// UCameraComponent* Camera = Cast<UCameraComponent>(Cast<AMyDefaultPawn>(GetWorld()->GetFirstPlayerController()->GetPawn())->GetComponentByClass(UCameraComponent::StaticClass()));
-	// Camera->SetFieldOfView(130);
+	Cast<AMyDefaultPawn>(GetWorld()->GetFirstPlayerController()->GetPawn())->SetFOV(130);
 }
 
 void ACollisionActor::SetCubeMaterial()
