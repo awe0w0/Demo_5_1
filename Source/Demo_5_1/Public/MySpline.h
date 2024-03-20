@@ -24,8 +24,13 @@ protected:
 
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<AActor> Cube1;
+
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<AActor> CameraActor;
 	
 	AMyDefaultPawn* DefaultPawn;
+
+	AActor* ACamera;
 
 	FTimerHandle TH;
 	

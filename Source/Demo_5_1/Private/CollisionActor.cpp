@@ -71,9 +71,9 @@ void ACollisionActor::CreateCube()
 	UMaterialInterface* MaterialA = LoadObject<UMaterialInterface>(NULL, TEXT("/Script/Engine.Material'/Game/Demo_5_1/Material/MaterialA_BP.MaterialA_BP'"));
 	
 
-	if (AMyCube* Cube = Cast<AMyCube>(CubeInstan))
+	if (AMyCube* CubeM = Cast<AMyCube>(CubeInstan))
 	{
-		Cube->SetMate(0, MaterialA);
+		CubeM->SetMate(0, MaterialA);
 		
 	}
 
@@ -110,15 +110,15 @@ void ACollisionActor::SetCubeMaterial()
 	UE_LOG(LogTemp, Log, TEXT("Cube Set Material"));
 	UMaterialInterface* MaterialB = LoadObject<UMaterialInterface>(NULL, TEXT("/Script/Engine.Material'/Game/Demo_5_1/Material/MaterialB_BP.MaterialB_BP'"));
 
-	if (AMyCube* Cube = Cast<AMyCube>(CubeInstan))
+	if (AMyCube* CubeM = Cast<AMyCube>(CubeInstan))
 	{
-		Cube->SetMate(0, MaterialB);
+		CubeM->SetMate(0, MaterialB);
 	}
 }
 
-void ACollisionActor::SetMyWidgetInstance(USplineUserWidget* MyWidgetInstance)
+void ACollisionActor::SetMyWidgetInstance(USplineUserWidget* _MyWidgetInstance)
 {
-	this->MyWidgetInstance = MyWidgetInstance;
+	this->MyWidgetInstance = _MyWidgetInstance;
 }
 
 void ACollisionActor::DestroyeSpawnedActor()

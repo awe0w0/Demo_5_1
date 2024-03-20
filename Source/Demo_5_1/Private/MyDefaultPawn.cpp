@@ -86,30 +86,33 @@ void AMyDefaultPawn::DestroySpline()
 {
  	Cast<AMyCube1>(Cube1Instan)->SetCollision(ECollisionEnabled::NoCollision);
 
-	Cast<AMySpline>(UGameplayStatics::GetActorOfClass(GetWorld(), AMySpline::StaticClass()))->Destroy();
+	if (UGameplayStatics::GetActorOfClass(GetWorld(), AMySpline::StaticClass()))
+		UGameplayStatics::GetActorOfClass(GetWorld(), AMySpline::StaticClass())->Destroy();
 	
 	SplineDestroyed = true;
 	
 }
 
-void AMyDefaultPawn::SetFOV(float FOV)
+inline void AMyDefaultPawn::SetFOV(float FOV)
 {
 	Cast<APlayerController>(GetController())->PlayerCameraManager->SetFOV(FOV);
 }
 
 void AMyDefaultPawn::CreateCube1()
 {
-	FVector Loc = Cast<AMySpline>(UGameplayStatics::GetActorOfClass(GetWorld(), AMySpline::StaticClass()))->Spline->GetLocationAtTime(0.f, ESplineCoordinateSpace::Type::World);
-	Loc.X += 500;
-	Loc.Y -= 700;
-	Loc.Z -= 200;
+	 if (!UGameplayStatics::GetActorOfClass(GetWorld(), AMyCube1::StaticClass())) {
+		FVector Loc = Cast<AMySpline>(UGameplayStatics::GetActorOfClass(GetWorld(), AMySpline::StaticClass()))->Spline->GetLocationAtTime(0.f, ESplineCoordinateSpace::Type::World);
+		Loc.X += 500;
+		Loc.Y -= 700;
+		Loc.Z -= 200;
 
-	Cube1Instan = GetWorld()->SpawnActor<AActor>(Cube1, FTransform(GetActorRotation(), Loc));
+		Cube1Instan = GetWorld()->SpawnActor<AActor>(Cube1, FTransform(GetActorRotation(), Loc));
 
-	UMaterialInterface* MaterialB = LoadObject<UMaterialInterface>(NULL, TEXT("/Script/Engine.Material'/Game/Demo_5_1/Material/MaterialB_BP.MaterialB_BP'"));
+		UMaterialInterface* MaterialB = LoadObject<UMaterialInterface>(NULL, TEXT("/Script/Engine.Material'/Game/Demo_5_1/Material/MaterialB_BP.MaterialB_BP'"));
 
-	if (AMyCube1* Cube1 = Cast<AMyCube1>(Cube1Instan))
-	{
-		Cube1->SetMate(0, MaterialB);
+		if (AMyCube1* Cube1M = Cast<AMyCube1>(Cube1Instan))
+		{
+			Cube1M->SetMate(0, MaterialB);
+		}
 	}
 }

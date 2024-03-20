@@ -4,12 +4,12 @@
 
 #include "CoreMinimal.h"
 #include "MySpline.h"
-#include "../../../Plugins/Developer/RiderLink/Source/RD/thirdparty/clsocket/src/ActiveSocket.h"
+#include "SpawnSplineCube.h"
 #include "Blueprint/UserWidget.h"
 #include "Components/Button.h"
 #include "Components/CheckBox.h"
 #include "Components/EditableText.h"
-#include "Components/Image.h"
+#include "JsonRequest.h"
 #include "Components/TextBlock.h"
 #include "SplineUserWidget.generated.h"
 
@@ -37,27 +37,27 @@ protected:
 
 	UPROPERTY(meta = (BindWidget)) 
 	UButton* ShowCheckBoxPanel;
+
+	UPROPERTY(meta = (BindWidget))
+	UButton* ShowJsonOnLog;
 	
 	UPROPERTY(meta = (BindWidget))
 	UPanelWidget* CheckBoxPanel;
 
+	UPROPERTY(EditAnywhere)
+	TSubclassOf<ASpawnSplineCube> SpawnSplineCube;
+
+	AActor* SpawnSplineCubeInstan;
+
 	AMySpline* SplineActor;
 
 	AMyDefaultPawn* DefaultPawn;
+
+	AJsonRequest* JsonRequest;
 	
 	TArray<bool> StateArray;
-
-	float Speed;
-	
-	float Current;
-
-	float SLength;
 	
 	bool IsShowCheckBoxPanel;
-
-	bool PIsPawnMoving;
-
-	bool Goback;
 	
 	UFUNCTION()
 	void MovePawn();
@@ -70,12 +70,19 @@ protected:
 
 	UFUNCTION()
 	void ClickCheckBox(bool bIsChecked);
+
+	UFUNCTION()
+	void ShowLogAndCreateGCube();
+
+	UFUNCTION()
+	void OnRequestSucceed(TArray<FUserState> UserStates, bool smt, int8 fmt, float V);
+
+	UFUNCTION()
+	void OnRequestFailed(TArray<FUserState> UserStates, bool smt, int8 fmt, float V);
 	
 	virtual void NativeConstruct() override;
 
 	virtual void NativeTick(const FGeometry& MyGeometry, float InDeltaTime) override;
-
-	virtual void NativeOnInitialized() override;
 
 public:
 	UPROPERTY(meta = (BindWidget))
@@ -88,7 +95,4 @@ public:
 
 	void SetRotationText(FText text);
 	
-	//void SetSplineActor(AMySpline* SplineActor);
-
-	//void SetDefaultPawn(AMyDefaultPawn* DefaultPawn);
 };

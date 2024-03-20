@@ -35,8 +35,6 @@ protected:
 	UPROPERTY(EditAnywhere)
 	TSubclassOf<AActor> Cube1;
 
-	UPROPERTY()
-	AActor* Cube1Instan;
 
 	FRotator CurrentRot;
 
@@ -52,6 +50,9 @@ public:
 	UPROPERTY(VisibleAnywhere)
 	USplineUserWidget* MyWidgetInstance;
 
+	UPROPERTY()
+	AActor* Cube1Instan;
+
 	bool SplineDestroyed;
 
 	void DestroySpline();
@@ -59,4 +60,6 @@ public:
 	void SetFOV(float FOV);
 
 	void CreateCube1();
+
+	TSharedPtr<FJsonObject> Json;
 };

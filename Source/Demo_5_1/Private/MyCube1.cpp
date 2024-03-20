@@ -21,7 +21,7 @@ AMyCube1::AMyCube1()
 void AMyCube1::BeginPlay()
 {
 	Super::BeginPlay();
-	GetWorld()->GetTimerManager().SetTimer(TH, this, &AMyCube1::DestroySelf, 30.f);
+	//GetWorld()->GetTimerManager().SetTimer(TH, this, &AMyCube1::DestroySelf, 30.f);
 }
 
 void AMyCube1::Interact_Implementation(APawn* InstigatorPawn)
